@@ -1,0 +1,38 @@
+@startuml c4_context_rates
+
+!include <C4/C4_Context>
+
+LAYOUT_LEFT_RIGHT()
+hide stereotype
+title C4 · L1 Context · Передача публичных ставок (ADR-002)
+
+Person(staff, "Кредитный / депозитный бэк-офис", "Рассчитывает и согласует ставки")
+Person(operator, "Оператор банка", "Консультирует клиента")
+Person_Ext(partner_operator, "Оператор партнёра", "Консультирует по импортированным ставкам")
+
+System(abs, "АБС", "Согласованный каталог ставок")
+System(platform, "Интеграционная платформа", "Публичные события Kafka")
+System(rates, "Сервис распространения ставок", "Read API, экспорт и ACK")
+System(cc, "Банковский кол-центр", "Получает актуальные ставки")
+System(sftp, "Файловый шлюз DMZ", "Защищённый обмен файлами")
+System_Ext(partner, "Партнёрский кол-центр", "Импорт CSV и ACK")
+
+Rel(staff, abs, "RC-01: расчёт в Excel, ввод и согласование версии", "Delphi / PL-SQL")
+Rel(abs, platform, "RC-01: public outbox через адаптер АБС", "Kafka / TLS")
+Rel(platform, rates, "RC-01: public rates", "Kafka / TLS")
+Rel(cc, rates, "RC-02: GET public-rates", "HTTPS / сервисная авторизация")
+Rel(operator, cc, "RC-02: просмотр ставки и срока")
+Rel(rates, sftp, "RC-03: CSV, manifest; RC-04: retry и отзыв", "SFTP")
+Rel(sftp, rates, "RC-03/04: ACK-файлы", "SFTP polling")
+Rel(partner, sftp, "RC-03: забрать файл и положить ACK", "Файловый обмен; без HTTP API")
+Rel(partner_operator, partner, "RC-03/04: консультация и контроль validUntil")
+
+note bottom of rates
+  Персональные ставки, клиентские данные и кредитный риск
+  не экспортируются. Просроченные данные блокируются.
+  Банковский кол-центр читает отдельную проекцию,
+  а не Oracle на каждый звонок.
+end note
+
+SHOW_LEGEND()
+@enduml
