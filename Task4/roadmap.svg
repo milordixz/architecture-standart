@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1100" viewBox="0 0 2100 1100">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+ text { font-family: Arial, DejaVu Sans, sans-serif; fill:#000000; }
+ .title { font-size:28px; font-weight:700; }
+ .subtitle { font-size:16px; }
+ .head { font-size:16px; font-weight:700; }
+ .task { font-size:15px; }
+</style>
+<text x="100" y="80" class="title">RoadMap: передача депозитных ставок в кол-центры</text>
+<text x="100" y="125" class="subtitle">MVP на 6 месяцев: банковский кол-центр через API, партнёрский кол-центр через SFTP-файл и ACK. Целевой горизонт 1 год: развитие внешнего канала и персональных ставок.</text>
+<rect x="360" y="230" width="1640" height="770" fill="#fff2cc"/>
+
+<rect x="100" y="170" width="260" height="60" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="206" text-anchor="middle" class="head">Система / команда</text>
+<polygon points="372,170 568,170 580,200 568,230 372,230 360,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="470.0" y="206" text-anchor="middle" class="head">Месяц 1</text>
+<polygon points="592,170 788,170 800,200 788,230 592,230 580,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="690.0" y="206" text-anchor="middle" class="head">Месяц 2</text>
+<polygon points="812,170 1008,170 1020,200 1008,230 812,230 800,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="910.0" y="206" text-anchor="middle" class="head">Месяц 3</text>
+<polygon points="1032,170 1228,170 1240,200 1228,230 1032,230 1020,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="1130.0" y="206" text-anchor="middle" class="head">Месяц 4</text>
+<polygon points="1252,170 1448,170 1460,200 1448,230 1252,230 1240,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="1350.0" y="206" text-anchor="middle" class="head">Месяц 5</text>
+<polygon points="1472,170 1668,170 1680,200 1668,230 1472,230 1460,200" fill="#dae8fc" stroke="#6c8ebf"/><text x="1570.0" y="206" text-anchor="middle" class="head">Месяц 6</text>
+<polygon points="1692,170 1988,170 2000,200 1988,230 1692,230 1680,200" fill="#d5e8d4" stroke="#82b366"/><text x="1840.0" y="206" text-anchor="middle" class="head">Горизонт 1 год</text>
+<rect x="100" y="230" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="288" text-anchor="middle" class="head">АБС / модуль ставок</text>
+<rect x="100" y="340" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="398" text-anchor="middle" class="head">Инфраструктура / ИБ</text>
+<rect x="100" y="450" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="508" text-anchor="middle" class="head">Сервис распространения</text>
+<rect x="100" y="560" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="618" text-anchor="middle" class="head">Банковский кол-центр</text>
+<rect x="100" y="670" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="728" text-anchor="middle" class="head">Партнёрский кол-центр</text>
+<rect x="100" y="780" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="838" text-anchor="middle" class="head">QA / пилот / выпуск</text>
+<rect x="100" y="890" width="260" height="110" fill="#f5f5f5" stroke="#666666"/>
+<text x="230.0" y="948" text-anchor="middle" class="head">Мониторинг / эксплуатация</text>
+<rect x="380" y="255" width="410" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="388" y="276" class="task">T1. Модель ставок, версия и период действия</text>
+<rect x="800" y="255" width="430" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="808" y="276" class="task">T2. Публикация утверждённой версии из АБС</text>
+<rect x="580" y="365" width="440" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="588" y="386" class="task">T3. Kafka, SQL snapshots, SFTP DMZ и TLS</text>
+<rect x="1030" y="365" width="430" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1038" y="386" class="task">T4. Контракты файла, подпись и ACK</text>
+<rect x="800" y="475" width="410" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="808" y="496" class="task">T5. Consumer и Query API</text>
+<rect x="1210" y="475" width="430" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1218" y="496" class="task">T6. Экспорт, manifest, retry и reconciliation</text>
+<rect x="800" y="585" width="390" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="808" y="606" class="task">T7. Экран ставок и подключение API</text>
+<rect x="1190" y="585" width="430" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1198" y="606" class="task">T8. TTL, ошибки и обучение операторов</text>
+<rect x="380" y="695" width="420" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="388" y="716" class="task">T9. Согласовать CSV/ACK и права доступа</text>
+<rect x="1200" y="695" width="440" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1208" y="716" class="task">T10. Импорт, версия и validUntil</text>
+<rect x="1250" y="805" width="210" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1258" y="826" class="task">T11. E2E, нагрузка, DR</text>
+<text x="1258" y="843" class="task">и безопасность</text>
+<rect x="1470" y="805" width="210" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1478" y="826" class="task">T12. Пилот и выпуск MVP</text>
+<rect x="380" y="915" width="410" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="388" y="936" class="task">T13. Модель доступа: только публичные ставки</text>
+<rect x="1200" y="915" width="440" height="55" fill="#ffe6cc" stroke="#d79b00"/>
+<text x="1208" y="936" class="task">T14. Мониторинг, алерты и runbook</text>
+<rect x="1700" y="682" width="300" height="70" fill="#d5e8d4" stroke="#82b366"/>
+<text x="1708" y="703" class="task">Y1. Защищённая внешняя</text>
+<text x="1708" y="720" class="task">интеграция или портал партнёра</text>
+<rect x="1700" y="902" width="300" height="70" fill="#d5e8d4" stroke="#82b366"/>
+<text x="1708" y="923" class="task">Y2. Персональные ставки после</text>
+<text x="1708" y="940" class="task">идентификации клиента</text>
+<rect x="100" y="1030" width="190" height="40" fill="#ffe6cc" stroke="#d79b00"/><text x="195" y="1055" text-anchor="middle" class="task">MVP 6 месяцев</text>
+<rect x="320" y="1030" width="240" height="40" fill="#d5e8d4" stroke="#82b366"/><text x="440" y="1055" text-anchor="middle" class="task">Целевой горизонт 1 год</text>
+</svg>

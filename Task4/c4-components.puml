@@ -1,0 +1,42 @@
+@startuml c4_components_rates
+
+!include <C4/C4_Component>
+
+LAYOUT_LEFT_RIGHT()
+hide stereotype
+title C4 · L3 Components · Сервис распространения ставок (ADR-002)
+
+Container_Ext(kafka, "Kafka", "Интеграционная платформа", "PublicRatesPublished")
+System_Ext(cc, "Банковский кол-центр", "Backend и UI оператора")
+Container_Ext(sftp, "Файловый шлюз DMZ", "SFTP", "Каталоги export и ACK")
+System_Ext(partner, "Партнёрский кол-центр", "Импортёр, локальный каталог и UI")
+
+Container_Boundary(rate_service, "Container: Сервис распространения ставок [Java Spring Boot]") {
+  Component(consumer, "Public rates consumer", "Component", "Схема, версия, inbox и снимок")
+  Component(query_api, "Query API", "Component", "Авторизация, версия и validUntil")
+  Component(exporter, "Snapshot exporter", "Component", "CSV, manifest, подпись и export job")
+  Component(transport, "File transport worker", "Component", "SFTP, retry и atomic rename")
+  Component(ack_worker, "ACK worker / reconciliation", "Component", "Версия, receipt, timeout и replay")
+  ComponentDb(snapshot_db, "Хранилище распространения", "MS SQL", "snapshots, inbox, exports, ACK и leases")
+}
+
+Rel(kafka, consumer, "RC-01: PublicRatesPublished", "Kafka / TLS")
+Rel(consumer, snapshot_db, "RC-01: inbox + snapshot + export job")
+Rel(cc, query_api, "RC-02: HTTPS GET")
+Rel(query_api, snapshot_db, "RC-02: read snapshot, проверка validUntil")
+Rel(exporter, snapshot_db, "RC-03: снимки и jobs, lease и версия")
+Rel(exporter, transport, "RC-03: готовый комплект")
+Rel(transport, sftp, "RC-03: файлы и manifest через rename", "SFTP")
+Rel(sftp, ack_worker, "RC-03/04: ACK-файлы", "SFTP polling")
+Rel(ack_worker, snapshot_db, "RC-03/04: статус и retry")
+Rel(transport, snapshot_db, "RC-03: журнал передачи, lease и попытки")
+Rel(partner, sftp, "RC-03: забрать CSV и положить ACK; RC-04: идемпотентный импорт", "SFTP")
+
+note bottom of rate_service
+  Все компоненты используют correlationId/exportId,
+  метрики lag, возраста снимка и отсутствия ACK.
+  TTL запрещает консультацию по просроченной ставке.
+end note
+
+SHOW_LEGEND()
+@enduml
